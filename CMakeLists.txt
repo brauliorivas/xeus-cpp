@@ -142,11 +142,15 @@ set(XEUS_CPP_HEADERS
     include/xeus-cpp/xmagics.hpp
     include/xeus-cpp/xoptions.hpp
     include/xeus-cpp/xpreamble.hpp
+    include/xeus-cpp/completions.hpp
+    include/xeus-cpp/model.hpp
     #src/xdemangle.hpp
     #src/xinspect.hpp
     #src/xsystem.hpp
     #src/xparser.hpp
     #src/xmagics/os.hpp
+    #src/xmagics/xcompletions.hpp
+    #src/plugins/gemini.hpp
 )
 
 set(XEUS_CPP_SRC
@@ -157,6 +161,10 @@ set(XEUS_CPP_SRC
     src/xoptions.cpp
     src/xparser.cpp
     src/xutils.cpp
+    src/xmagics/xcompletions.cpp
+    src/plugins/completions.cpp
+    src/plugins/model.cpp
+    src/plugins/gemini.cpp
 )
 
 if(EMSCRIPTEN)

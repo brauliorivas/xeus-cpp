@@ -25,6 +25,7 @@
 #include "xbuffer.hpp"
 #include "xeus_cpp_config.hpp"
 #include "xmanager.hpp"
+#include "completions.hpp"
 
 namespace nl = nlohmann;
 
@@ -39,6 +40,8 @@ namespace xcpp
 
         void publish_stdout(const std::string&);
         void publish_stderr(const std::string&);
+
+        completions& get_completions();
 
     private:
 
@@ -90,6 +93,8 @@ namespace xcpp
 
         xoutput_buffer m_cout_buffer;
         xoutput_buffer m_cerr_buffer;
+
+        completions* m_completions;
     };
 }
 

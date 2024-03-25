@@ -16,6 +16,7 @@
 #include "xmagics/os.hpp"
 #include "xparser.hpp"
 #include "xsystem.hpp"
+#include "xmagics/xcompletions.hpp"
 
 #include <xeus/xhelper.hpp>
 
@@ -269,6 +270,7 @@ namespace xcpp
         , p_cerr_strbuf(nullptr)
         , m_cout_buffer(std::bind(&interpreter::publish_stdout, this, _1))
         , m_cerr_buffer(std::bind(&interpreter::publish_stderr, this, _1))
+        , m_completions(new completions())
     {
         redirect_output();
         init_includes();
@@ -279,6 +281,7 @@ namespace xcpp
     interpreter::~interpreter()
     {
         restore_output();
+        delete m_completions;
     }
 
     nl::json interpreter::execute_request_impl(
@@ -406,13 +409,13 @@ namespace xcpp
         return kernel_res;
     }
 
-    nl::json interpreter::complete_request_impl(const std::string& /*code*/, int cursor_pos)
+    nl::json interpreter::complete_request_impl(const std::string& code, int cursor_pos)
     {
-        return xeus::create_complete_reply(
-            nl::json::array(), /*matches*/
-            cursor_pos,        /*cursor_start*/
-            cursor_pos         /*cursor_end*/
-        );
+        if (code[0] == 'H') { // check for completions
+            return xeus::create_complete_reply({"int sum;", "Hey", "Howdy"}, 5, cursor_pos);
+        } else {
+            return xeus::create_complete_reply(nl::json::array(), cursor_pos, cursor_pos);
+        }
     }
 
     nl::json interpreter::inspect_request_impl(const std::string& code, int cursor_pos, int /*detail_level*/)
@@ -593,6 +596,9 @@ namespace xcpp
         //        preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("file", writefile());
         //        preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("timeit",
         //        timeit(&m_interpreter));
+        auto completions_context = get_completions();
+        xcpp::xcompletions_magic completion(completions_context);
+        preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("ai", completion);
     }
 
     std::string interpreter::get_stdopt(int argc, const char* const* argv)
@@ -609,5 +615,10 @@ namespace xcpp
             }
         }
         return res;
+    }
+
+    completions& interpreter::get_completions()
+    {
+        return *m_completions;
     }
 }

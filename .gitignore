@@ -45,3 +45,6 @@ share/jupyter/kernels/xcpp/kernel.json
 build/
 
 bld
+
+# Editors configuration
+.vscode/
