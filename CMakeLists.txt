@@ -144,6 +144,12 @@ set(XEUS_CPP_HEADERS
     include/xeus-cpp/xpreamble.hpp
     include/xeus-cpp/completions.hpp
     include/xeus-cpp/model.hpp
+    include/xplugin/xfactory.hpp
+    include/xplugin/xlazy_shared_library_plugin_factory.hpp
+    include/xplugin/xplugin_config.hpp
+    include/xplugin/xplugin_registry.hpp
+    include/xplugin/xshared_library.hpp
+    include/xplugin/xthreads.hpp
     #src/xdemangle.hpp
     #src/xinspect.hpp
     #src/xsystem.hpp
@@ -151,6 +157,7 @@ set(XEUS_CPP_HEADERS
     #src/xmagics/os.hpp
     #src/xmagics/xcompletions.hpp
     #src/plugins/gemini.hpp
+    #src/plugins/plugin_base.hpp
 )
 
 set(XEUS_CPP_SRC
@@ -165,6 +172,7 @@ set(XEUS_CPP_SRC
     src/plugins/completions.cpp
     src/plugins/model.cpp
     src/plugins/gemini.cpp
+    src/plugins/completions_plugin.cpp
 )
 
 if(EMSCRIPTEN)
