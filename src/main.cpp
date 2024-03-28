@@ -28,9 +28,6 @@
 #include "xeus-cpp/xeus_cpp_config.hpp"
 #include "xeus-cpp/xinterpreter.hpp"
 #include "xeus-cpp/xutils.hpp"
-#include "plugins/plugin_base.hpp"
-#include "xplugin/xfactory.hpp"
-#include "xplugin/xplugin_registry.hpp"
 
 int main(int argc, char* argv[])
 {
