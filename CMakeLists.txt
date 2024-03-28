@@ -453,3 +453,5 @@ endif ()
 if(XEUS_CPP_INCLUDE_DOCS)
     add_subdirectory(docs)
 endif()
+
+add_subdirectory(external/xplugin)

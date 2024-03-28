@@ -1,0 +1,3 @@
+[submodule "external/xplugin"]
+	path = external/xplugin
+	url = git@github.com:QuantStack/xplugin.git
